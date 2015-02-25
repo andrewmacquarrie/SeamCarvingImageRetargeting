@@ -5,8 +5,8 @@ function retargetImage()
 % uses creative commons image: tpsdave, available from http://pixabay.com/en/deer-fawn-animal-forest-woods-301915/
 
 importance_of_saliency_in_seam_carving = 0.1;
-addpath('../../saliency/gbvs/');
-addpath('../../retargeting/seam_carving-1.0/');
+addpath(genpath('C:/Software/gbvs/'));
+addpath('C:/Software/seam_carving-1.0/');
 
 x_reduction = 10;
 y_reduction = 0;
