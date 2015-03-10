@@ -7,7 +7,7 @@ function retargetVideoBasic(video_file, salience_map, x_reduction,frame_to_skip,
 scaleFactor = 1;
 importance_of_saliency_in_seam_carving = 0.8;
 % addpath(genpath('C:/Software/gbvs/'));
-addpath('/Software/seam_carving-1.0');
+addpath('./modifiedSeamCarving');
 
 %--- carving parameters
 p.piecewiseThresh = 9e9; % threshold for piecewise-connected seams (see seamConstructPathPiecewise). Set to very large value to ignore
