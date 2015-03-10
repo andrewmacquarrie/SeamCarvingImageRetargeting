@@ -6,10 +6,10 @@ function retargetImage(image_file, salience_map, x_reduction)
 
 scaleFactor = 1;
 importance_of_saliency_in_seam_carving = 0.8;
-addpath(genpath('C:/Software/gbvs/'));
-addpath('C:/Software/seam_carving-1.0/');
+% addpath(genpath('C:/Software/gbvs/'));
+addpath('/Software/seam_carving-1.0');
 
-%--- Salience detector parameters
+%--- carving parameters
 p.piecewiseThresh = 9e9; % threshold for piecewise-connected seams (see seamConstructPathPiecewise). Set to very large value to ignore
 p.method = 'forward'; % 'backward' or 'forward'
 p.seamFunc = @seamPath_dp; % @seamPath_dp for dynamic programming, @seamPath_gcut for graph-cut
