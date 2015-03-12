@@ -1,4 +1,4 @@
-function retargetVideoBasic(video_file, salience_map, x_reduction,frame_to_skip,frames_to_process)
+function retargetVideoBasic(video_file, salience_map, x_reduction,frame_to_skip,frames_to_process,createSeams)
 
 % makes use of Michael Rubinstein's seam carving implementation - available here: http://people.csail.mit.edu/mrub/
 % makes use of Graph-Based Visual Saliency - available here: http://www.vision.caltech.edu/~harel/share/gbvs.php
@@ -35,10 +35,16 @@ y_reduction = 0;
 %MM = map.master_map_resized;
 %W = MM .* importance_of_saliency_in_seam_carving;
 
+
 mask = ~logical(rgb2gray(imresize(imread(salience_map),scaleFactor)));
 W = mask .* importance_of_saliency_in_seam_carving;
-[retargIm,S1,xp] = imretarget(img,[sizey - y_reduction,sizex - x_reduction],W,p);
 
+if createSeams
+    [retargIm,S1,xp] = imretarget(img,[sizey - y_reduction,sizex - x_reduction],W,p);
+    save('seams.mat','xp');
+else
+    load('seams.mat','xp');
+end
 
 mkdir('outputImages');
 for imNum = 1:frames_to_process
@@ -49,7 +55,8 @@ for imNum = 1:frames_to_process
     n=x_reduction;
     for i=1:n
         fprintf(1,'Shrinking Seam %d (%d)\n',i,n); 
-        xpath = expand(xp(:,1:i)');
+        % xpath = expand(xp(:,1:i)');
+        xpath = xp(:,i)';
         J = seamRemove(J,xpath);
     end;
     imwrite(J,sprintf('outputImages/outputFile%06d.png',imNum));
