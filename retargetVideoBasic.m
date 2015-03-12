@@ -1,4 +1,4 @@
-function retargetVideoBasic(video_file, salience_map, x_reduction,frame_to_skip,frames_to_process,createSeams)
+function retargetVideoBasic(video_file, salience_map, x_reduction,frame_to_skip,frames_to_process,create_seams,seam_file)
 
 % makes use of Michael Rubinstein's seam carving implementation - available here: http://people.csail.mit.edu/mrub/
 % makes use of Graph-Based Visual Saliency - available here: http://www.vision.caltech.edu/~harel/share/gbvs.php
@@ -39,15 +39,15 @@ y_reduction = 0;
 mask = ~logical(rgb2gray(imresize(imread(salience_map),scaleFactor)));
 W = mask .* importance_of_saliency_in_seam_carving;
 
-if createSeams
+if create_seams
     [retargIm,S1,xp] = imretarget(img,[sizey - y_reduction,sizex - x_reduction],W,p);
-    save('seams.mat','xp');
+    save(seam_file,'xp');
 else
-    load('seams.mat','xp');
+    load(seam_file,'xp');
 end
 
 mkdir('outputImages');
-for imNum = 1:frames_to_process
+for imNum = frame_to_skip+1:frame_to_skip+frames_to_process
     img = im2double(readFrame(videoObj));
     img = imresize(img, scaleFactor);
     
