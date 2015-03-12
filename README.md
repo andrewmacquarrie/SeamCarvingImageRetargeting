@@ -13,3 +13,5 @@ Uses creative commons image: tpsdave, available from http://pixabay.com/en/deer-
 
 
 rearrangeImageBasedOnClicks() can also be used to move objects in an image by introducing seams to the left/right/above/below the object until it's in the desired position.
+
+All images and video files are copyrighted
